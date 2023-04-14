@@ -1,6 +1,7 @@
 package mvc;
 
 public interface AppFactory {
+    //test change
     public Model makeModel();
     public View makeView(Model m);
     public String getTitle();
