@@ -15,8 +15,37 @@ public class simPanel extends AppPanel{
     public simPanel(AppFactory factory)
     {
         super(factory);
+        controlPanel.setBackground(Color.white);
+
+        JPanel buttons = new JPanel();
+        buttons.setBackground(Color.white);
+        buttons.setLayout(new GridLayout(5, 1, 0, 20));
+
+        Start = new JButton("Start");
+        Start.addActionListener(this);
+        buttons.add(Start);
+        Suspend = new JButton("Suspend");
+        Suspend.addActionListener(this);
+        buttons.add(Suspend);
+        Resume = new JButton("Resume");
+        Resume.addActionListener(this);
+        buttons.add(Resume);
+        Stop = new JButton("Stop");
+        Stop.addActionListener(this);
+        buttons.add(Stop);
+        Stats = new JButton("Stats");
+        Stats.addActionListener(this);
+        buttons.add(Stats);
+
+        controlPanel.add(buttons);
+        this.setVisible(true);
     }
 
-    controlPanel.setBackground(COLOR.white);
+    public static void main(String[] args)
+    {
+        AppFactory factory = new simFactory();
+        AppPanel panel = new simPanel(factory);
+        panel.display();
+    }
 
 }
