@@ -1,6 +1,8 @@
 package simStation;
 
-abstract class Agent implements Runnable {
+import mvc.Utilities;
+
+public abstract class Agent implements Runnable {
 
     protected String name;
     protected Thread myThread;
@@ -15,9 +17,9 @@ abstract class Agent implements Runnable {
         suspended = false;
         stopped = false;
         myThread = null;
-        x = 0;
-        y = 0;
-        heading = Heading.NORTH;
+        x = Utilities.rng.nextInt(250);
+        y = Utilities.rng.nextInt(250);
+        heading = Heading.random();
     }
 
     public void setManager(Manager m) { manager = m; }
@@ -71,4 +73,32 @@ abstract class Agent implements Runnable {
     }
 
     public abstract void update();
+
+    public void move(int steps)
+    {
+        if(this.heading == Heading.NORTH)
+        {
+            this.y -= steps;
+        }
+        else if(this.heading == Heading.EAST)
+        {
+            this.x += steps;
+        }
+        else if(this.heading == Heading.SOUTH)
+        {
+            this.y += steps;
+        }
+        else if(this.heading == Heading.WEST)
+        {
+            this.x -= steps;
+        }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

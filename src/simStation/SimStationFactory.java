@@ -26,7 +26,7 @@ public class SimStationFactory implements AppFactory {
 
     public String about()
     {
-        return "SimStation simulation showing four simulations: randomWalks, flocking, plague, and prisonersDilemma";
+        return "SimStation simulation 1.0 for CS151 group 10";
     }
 
     public String[] getHelp()
@@ -36,6 +36,26 @@ public class SimStationFactory implements AppFactory {
 
     public Command makeEditCommand(Model model, String type, Object source)
     {
+        if(type == "Start")
+        {
+            return new StartCommand(model);
+        }
+        else if(type == "Stats")
+        {
+            return new StatsCommand(model);
+        }
+        else if(type == "Resume")
+        {
+            return new ResumeCommand(model);
+        }
+        else if(type == "Suspend")
+        {
+            return new SuspendCommand(model);
+        }
+        else if(type == "Stop")
+        {
+            return new StopCommand(model);
+        }
         return null;
     }
 }

@@ -26,11 +26,17 @@ class RandomWalkFactory extends SimStationFactory {
     public String getTitle() { return "Random Walks";}
 }
 
-public class RandomWalkSimulation extends Simulation {
+ class RandomWalkSimulation extends Simulation {
 
     public void populate() {
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < 15; i++) {
             addAgent(new Drunk());
+        }
+    }
+
+    public void stats()
+    {
+        System.out.println(this.getAgents());
     }
 
     public static void main(String[] args) {
