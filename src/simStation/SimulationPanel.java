@@ -4,7 +4,7 @@ import mvc.*;
 
 import java.awt.*;
 import javax.swing.*;
-public class simPanel extends AppPanel{
+public class SimulationPanel extends AppPanel{
 
     private JButton Start;
     private JButton Suspend;
@@ -12,7 +12,7 @@ public class simPanel extends AppPanel{
     private JButton Stop;
     private JButton Stats;
 
-    public simPanel(AppFactory factory)
+    public SimulationPanel(AppFactory factory)
     {
         super(factory);
         controlPanel.setBackground(Color.white);
@@ -43,8 +43,8 @@ public class simPanel extends AppPanel{
 
     public static void main(String[] args)
     {
-        AppFactory factory = new simFactory();
-        AppPanel panel = new simPanel(factory);
+        AppFactory factory = new SimStationFactory();
+        AppPanel panel = new SimulationPanel(factory);
         panel.display();
     }
 

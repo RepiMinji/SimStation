@@ -2,16 +2,16 @@ package simStation;
 
 import mvc.*;
 
-public class simFactory implements AppFactory {
+public class SimStationFactory implements AppFactory {
 
     public Model makeModel()
     {
-        return new simStation();
+        return new Simulation();
     }
 
     public View makeView(Model m)
     {
-        return new simStationView((simStation)m);
+        return new SimulationView((Simulation)m);
     }
 
     public String[] getEditCommands()
