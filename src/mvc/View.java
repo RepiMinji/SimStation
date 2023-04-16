@@ -1,36 +1,38 @@
 package mvc;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import javax.swing.border.LineBorder;
+import java.io.*;
+import java.beans.*;
 
 public class View extends JPanel implements PropertyChangeListener {
+
     protected Model model;
 
     public View(Model model) {
+        super();
         this.model = model;
-        model.addPropertyChangeListener(this);
-        this.updateUI();
-
-        //creates black border around view panel
-        Border line = BorderFactory.createLineBorder(Color.black);
-        setBorder(line);
-        setBackground(Color.LIGHT_GRAY);
-        repaint();
+        //model.addPropertyChangeListener(this);
+        // optional border around the view component
+        setBorder(LineBorder.createGrayLineBorder());//.createBlackLineBorder());
     }
-    public void propertyChange(PropertyChangeEvent evt) {
-        repaint();
-        this.updateUI();
-    }
-    public void setModel(Model m) {
-        //setting new model
-        this.model = m;
-        this.model.initSupport();
-        this.model.addPropertyChangeListener(this);
-        this.updateUI();
 
+    public Model getModel() {
+        return model;
+    }
+
+    // called by File/Open and File/New
+    public void setModel(Model newModel) {
+        //if (this.model != null) this.model.removePropertyChangeListener(this);
+        this.model = newModel;
+        //this.model.initSupport();
+        if (newModel != null) {
+            this.model.addPropertyChangeListener(this);
+            //this.repaint();
+        }
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent arg0) {
         this.repaint();
     }
 

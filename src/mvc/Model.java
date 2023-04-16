@@ -1,27 +1,42 @@
 package mvc;
 
-abstract public class Model extends Bean{
-    Boolean unsavedChanges = false;
-    String fileName = null;
-    public boolean getUnsavedChanges() {
+public abstract class Model extends Bean {
+    private static final long serialVersionUID = 1L;
 
-        return unsavedChanges;
-    }
-
-    public void changed(){
-        unsavedChanges = true;
-        firePropertyChange(fileName, null, this);
-    }
-
-    public void setFileName(String fName) {
-        fileName = fName;
-    }
-
+    private String fileName = null;
+    private Boolean unsavedChanges = false;
     public String getFileName() {
         return fileName;
     }
-
-    public void setUnsavedChanges(boolean b) {
-        unsavedChanges = b;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
+    public Boolean getUnsavedChanges() {
+        return unsavedChanges;
+    }
+    public void setUnsavedChanges(Boolean unsavedChanges) {
+        this.unsavedChanges = unsavedChanges;
+    }
+
+    public void changed() {
+        unsavedChanges = true;
+        firePropertyChange(null, null, null);
+    }
+
+    public void changed(String name, Object oldVal, Object newVal) {
+        unsavedChanges = true;
+        firePropertyChange(name, oldVal, newVal);
+    }
+
+    /*
+     * 2 ways to implement New and Open: reuse the same
+     * memory space as the old model, or create a new
+     * model and reset panel and view pointers to it.
+     * The copy method is used in the first scheme
+     */
+    public void copy(Model other) {
+        this.fileName = other.fileName;
+        this.unsavedChanges = other.unsavedChanges;
+    }
+
 }

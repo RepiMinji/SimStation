@@ -1,18 +1,15 @@
 package mvc;
 
-abstract public class Command {
-    public Model model;
+public abstract class Command {
+    protected Model model;
 
-    public Command (Model model){
+    public Command(Model model) {
+        super();
         this.model = model;
     }
 
-    public Model getModel(){
-        return this.model;
-    }
+    public String toString() { return "command.model = " + model; }
 
-    public void execute() throws Exception {
-
-    }
+    public abstract void execute() throws Exception ;
 
 }
