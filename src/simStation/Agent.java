@@ -9,8 +9,9 @@ public abstract class Agent implements Runnable {
     private boolean suspended, stopped;
     protected Manager manager;
     protected Heading heading;
-    protected double x;
-    protected double y;
+    protected int x;
+    protected int y;
+    protected Simulation world;
 
     public Agent(String name) {
         this.name = name;
@@ -32,6 +33,14 @@ public abstract class Agent implements Runnable {
         return result;
     }
     // thread stuff:
+    public synchronized void start()
+    {
+        if(myThread == null)
+        {
+            myThread = new Thread(this, name);
+        }
+        myThread.start();
+    }
     public synchronized void stop() { stopped = true; }
     public synchronized boolean isStopped() { return stopped; }
     public synchronized void suspend() { suspended = true; }
@@ -94,11 +103,11 @@ public abstract class Agent implements Runnable {
         }
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
@@ -108,5 +117,13 @@ public abstract class Agent implements Runnable {
 
     public void setHeading(Heading heading) {
         this.heading = heading;
+    }
+
+    public Simulation getWorld() {
+        return world;
+    }
+
+    public void setWorld(Simulation world) {
+        this.world = world;
     }
 }

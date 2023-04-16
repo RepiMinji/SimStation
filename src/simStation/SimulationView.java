@@ -3,25 +3,27 @@ package simStation;
 import mvc.*;
 
 import java.awt.*;
-import java.awt.geom.*;
+import java.util.*;
 
 public class SimulationView extends View {
 
-    Ellipse2D.Double a;
 
     public SimulationView(Simulation s)
     {
         super(s);
-        repaint();
     }
 
-    public void draw(Graphics2D g)
+    public void paintComponent(Graphics gc)
     {
-        g.setColor(Color.CYAN);
-        for(Agent agent: Simulation.getAgents())
+        Simulation sim = (Simulation) model;
+        Color c = gc.getColor();
+        Iterator<Agent> it = sim.iterator();
+        while(it.hasNext())
         {
-            a = new Ellipse2D.Double(a.getX(), a.getY(), 5, 5);
-            g.fill(a);
+            Agent agent = it.next();
+            gc.setColor(Color.cyan);
+            gc.fillOval(agent.getX(), agent.getY(), 5, 5);
         }
+        gc.setColor(c);
     }
 }

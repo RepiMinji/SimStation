@@ -36,7 +36,7 @@ class RandomWalkFactory extends SimStationFactory {
 
     public void stats()
     {
-        System.out.println(this.getAgents());
+
     }
 
     public static void main(String[] args) {

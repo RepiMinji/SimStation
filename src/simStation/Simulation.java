@@ -4,7 +4,7 @@ import java.util.*;
 import mvc.*;
 
 public class Simulation extends Model {
-    static Manager manager;
+    protected List<Agent> agents;
 
     transient private Timer timer; // timers aren't serializable
     private int clock;
@@ -29,30 +29,49 @@ public class Simulation extends Model {
 
     public void addAgent(Agent a)
     {
-        this.manager.add(a);
+        agents.add(a);
+        a.setWorld(this);
     }
 
     public void start() throws Exception {
+        agents = new LinkedList<Agent>();
+        clock = 0;
         this.populate();
-        this.manager.execute("g");
+        startTimer();
+        for(Agent agent: agents)
+        {
+            agent.start();
+        }
     }
 
     public void suspend() throws Exception
     {
-        this.manager.execute("s");
+        for(Agent agent: agents)
+        {
+            agent.suspend();
+        }
+        stopTimer();
     }
 
     public void resume() throws Exception {
-        this.manager.execute("r");
+        startTimer();
+        for(Agent agent: agents)
+        {
+            agent.resume();
+        }
     }
 
     public void stop() throws Exception {
-        this.manager.execute("h");
+        for(Agent agent: agents)
+        {
+            agent.stop();
+        }
+        stopTimer();
     }
 
     public Agent getNeighbor(Agent a, Double radius)
     {
-        for(Agent b: this.manager.getAgents())
+        for(Agent b: agents)
         {
             double distance = Math.sqrt(Math.pow(2, b.getX() - a.getX()) + Math.pow(2, b.getY() - a.getY()));
             if(distance <= radius)
@@ -64,10 +83,6 @@ public class Simulation extends Model {
         return null;
     }
 
-    public static List<Agent> getAgents() {
-        return manager.getAgents();
-    }
-
     public void populate()
     {
 
@@ -76,6 +91,11 @@ public class Simulation extends Model {
     public void stats()
     {
 
+    }
+
+    public synchronized Iterator<Agent> iterator()
+    {
+        return agents.iterator();
     }
 
 }

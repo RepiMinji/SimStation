@@ -34,8 +34,7 @@ public class SimStationFactory implements AppFactory {
         return new String[]{"blah blah blah"};
     }
 
-    public Command makeEditCommand(Model model, String type, Object source)
-    {
+    public Command makeEditCommand(Model model, String type, Object source){
         if(type == "Start")
         {
             return new StartCommand(model);
