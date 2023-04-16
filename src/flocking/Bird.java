@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.Iterator;
 class Bird extends Agent{
 
-    int speed;
+    private int speed;
     public Bird()
     {
         super("Bird");

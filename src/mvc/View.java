@@ -12,7 +12,7 @@ public class View extends JPanel implements PropertyChangeListener {
     public View(Model model) {
         super();
         this.model = model;
-        //model.addPropertyChangeListener(this);
+        model.addPropertyChangeListener(this);
         // optional border around the view component
         setBorder(LineBorder.createGrayLineBorder());//.createBlackLineBorder());
     }
@@ -23,13 +23,12 @@ public class View extends JPanel implements PropertyChangeListener {
 
     // called by File/Open and File/New
     public void setModel(Model newModel) {
-        //if (this.model != null) this.model.removePropertyChangeListener(this);
+        this.model.removePropertyChangeListener(this);
         this.model = newModel;
-        //this.model.initSupport();
-        if (newModel != null) {
-            this.model.addPropertyChangeListener(this);
-            //this.repaint();
-        }
+        this.model.initSupport();
+        this.model.addPropertyChangeListener(this);
+        this.updateUI();
+        this.repaint();
     }
     @Override
     public void propertyChange(PropertyChangeEvent arg0) {

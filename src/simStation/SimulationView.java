@@ -3,6 +3,7 @@ package simStation;
 import mvc.*;
 
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
 import java.util.*;
 
 public class SimulationView extends View {
