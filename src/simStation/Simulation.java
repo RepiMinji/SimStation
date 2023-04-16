@@ -6,9 +6,14 @@ import mvc.*;
 public class Simulation extends Model {
     public static final int SIZE = 250;
     protected List<Agent> agents;
-
+    private Manager manager;
     transient private Timer timer; // timers aren't serializable
     private int clock;
+    public Simulation()
+    {
+        agents = new LinkedList<Agent>();
+        manager = new Manager();
+    }
 
     private void startTimer() {
         timer = new Timer();
@@ -34,6 +39,7 @@ public class Simulation extends Model {
 
     public void addAgent(Agent a)
     {
+        manager.add(a);
         agents.add(a);
         a.setWorld(this);
     }
