@@ -18,12 +18,15 @@ public abstract class Agent implements Runnable {
         suspended = false;
         stopped = false;
         myThread = null;
-        x = Utilities.rng.nextInt(250);
-        y = Utilities.rng.nextInt(250);
+        x = Utilities.rng.nextInt(world.SIZE);
+        y = Utilities.rng.nextInt(world.SIZE);
         heading = Heading.random();
     }
 
-    public void setManager(Manager m) { manager = m; }
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
     public String getName() { return name; }
     public synchronized String toString() {
         String result = name;
@@ -85,21 +88,48 @@ public abstract class Agent implements Runnable {
 
     public void move(int steps)
     {
-        if(this.heading == Heading.NORTH)
+        switch(heading)
         {
-            this.y -= steps;
-        }
-        else if(this.heading == Heading.EAST)
-        {
-            this.x += steps;
-        }
-        else if(this.heading == Heading.SOUTH)
-        {
-            this.y += steps;
-        }
-        else if(this.heading == Heading.WEST)
-        {
-            this.x -= steps;
+            case NORTH:
+            {
+                y -= steps;
+                if(y < 0)
+                {
+                    y = Simulation.SIZE + y;
+                }
+                world.changed();
+                break;
+            }
+            case EAST:
+            {
+                x += steps;
+                if(x > Simulation.SIZE)
+                {
+                    x = Simulation.SIZE - x;
+                }
+                world.changed();
+                break;
+            }
+            case SOUTH:
+            {
+                y += steps;
+                if(y > Simulation.SIZE)
+                {
+                    y = Simulation.SIZE - y;
+                }
+                world.changed();
+                break;
+            }
+            case WEST:
+            {
+                x -= steps;
+                if(x < 0)
+                {
+                    x = Simulation.SIZE + x;
+                }
+                world.changed();
+                break;
+            }
         }
     }
 

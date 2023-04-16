@@ -14,6 +14,11 @@ class Drunk extends Agent {
 
     public void update() {
         heading = Heading.random();
+        Drunk neighbor = (Drunk) world.getNeighbor(this, 10.0);
+        if(neighbor != null)
+        {
+            heading = Heading.random();
+        }
         int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
     }
@@ -36,11 +41,6 @@ class RandomWalkFactory extends SimStationFactory {
         for(int i = 0; i < 15; i++) {
             addAgent(new Drunk());
         }
-    }
-
-    public void stats()
-    {
-
     }
 
     public static void main(String[] args) {

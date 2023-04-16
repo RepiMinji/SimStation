@@ -4,6 +4,7 @@ import java.util.*;
 import mvc.*;
 
 public class Simulation extends Model {
+    public static final int SIZE = 250;
     protected List<Agent> agents;
 
     transient private Timer timer; // timers aren't serializable
@@ -25,6 +26,10 @@ public class Simulation extends Model {
         }
     }
 
+    public int getClock() {
+        return clock;
+    }
+
     // etc.
 
     public void addAgent(Agent a)
@@ -36,7 +41,7 @@ public class Simulation extends Model {
     public void start() throws Exception {
         agents = new LinkedList<Agent>();
         clock = 0;
-        this.populate();
+        populate();
         startTimer();
         for(Agent agent: agents)
         {
@@ -88,9 +93,12 @@ public class Simulation extends Model {
 
     }
 
-    public void stats()
+    public String[] stats()
     {
-
+        String[] s = new String[2];
+        s[0] = "agents: " + agents.size();
+        s[1] = "timer: " + this.getClock();
+        return s;
     }
 
     public synchronized Iterator<Agent> iterator()

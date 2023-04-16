@@ -19,23 +19,25 @@ public class SimulationPanel extends AppPanel{
 
         JPanel buttons = new JPanel();
         buttons.setBackground(Color.white);
-        buttons.setLayout(new GridLayout(5, 1, 0, 20));
+        Panel p = new Panel();
+        p.setLayout(new GridLayout(5, 1, 0, 20));
 
         Start = new JButton("Start");
         Start.addActionListener(this);
-        buttons.add(Start);
+        p.add(Start);
         Suspend = new JButton("Suspend");
         Suspend.addActionListener(this);
-        buttons.add(Suspend);
+        p.add(Suspend);
         Resume = new JButton("Resume");
         Resume.addActionListener(this);
-        buttons.add(Resume);
+        p.add(Resume);
         Stop = new JButton("Stop");
         Stop.addActionListener(this);
-        buttons.add(Stop);
+        p.add(Stop);
         Stats = new JButton("Stats");
         Stats.addActionListener(this);
-        buttons.add(Stats);
+        p.add(Stats);
+        buttons.add(p);
 
         controlPanel.add(buttons);
         this.setVisible(true);

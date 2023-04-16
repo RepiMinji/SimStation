@@ -11,19 +11,20 @@ public class SimulationView extends View {
     public SimulationView(Simulation s)
     {
         super(s);
+        setBackground(Color.white);
     }
 
     public void paintComponent(Graphics gc)
     {
         Simulation sim = (Simulation) model;
-        Color c = gc.getColor();
+        Color oldColor = gc.getColor();
         Iterator<Agent> it = sim.iterator();
         while(it.hasNext())
         {
-            Agent agent = it.next();
+            Agent a = it.next();
             gc.setColor(Color.cyan);
-            gc.fillOval(agent.getX(), agent.getY(), 5, 5);
+            gc.fillOval(a.getX(), a.getY(), 5, 5);
         }
-        gc.setColor(c);
+        gc.setColor(oldColor);
     }
 }
