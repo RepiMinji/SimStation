@@ -15,17 +15,17 @@ class Bird extends Agent{
 
     public void update()
     {
-     //   Bird neighbor = getNeighbor(this, 10);
-      //  if(neighbor != null)
-       // {
-        //    this.setHeading(neighbor.getHeading());
-         //   this.setSpeed(neighbor.getSpeed());
-        //}
-        //else {
-         //   heading = Heading.random();
-          //  int steps = this.speed * (Utilities.rng.nextInt(10) + 1);
-           // move(steps);
-       // }
+        Bird neighbor = (Bird) world.getNeighbor(this, 10.0);
+        if(neighbor != null)
+        {
+            this.setHeading(neighbor.getHeading());
+            this.setSpeed(neighbor.getSpeed());
+        }
+        else {
+            heading = Heading.random();
+            int steps = this.speed * (Utilities.rng.nextInt(10) + 1);
+            move(steps);
+        }
     }
 
     public int getSpeed() {
@@ -52,6 +52,7 @@ class flockingSimulation extends Simulation{
 
     public void stats()
     {
+        int b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0;
 
     }
 

@@ -28,6 +28,10 @@ class RandomWalkFactory extends SimStationFactory {
 
  class RandomWalkSimulation extends Simulation {
 
+    public RandomWalkSimulation()
+    {
+        super();
+    }
     public void populate() {
         for(int i = 0; i < 15; i++) {
             addAgent(new Drunk());

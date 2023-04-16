@@ -14,5 +14,6 @@ public class ResumeCommand extends Command{
         }
         Simulation sim = (Simulation)model;
         sim.resume();
+        sim.changed();
     }
 }

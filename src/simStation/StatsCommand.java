@@ -13,5 +13,6 @@ public class StatsCommand extends Command{
         }
         Simulation sim = (Simulation)model;
         sim.stats();
+        sim.changed();
     }
 }

@@ -14,5 +14,6 @@ public class SuspendCommand extends Command{
         }
         Simulation sim = (Simulation)model;
         sim.suspend();
+        sim.changed();
     }
 }
