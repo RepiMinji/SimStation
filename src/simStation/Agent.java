@@ -9,8 +9,8 @@ public abstract class Agent implements Runnable {
     private boolean suspended, stopped;
     protected Manager manager;
     protected Heading heading;
-    protected int x;
-    protected int y;
+    protected double x;
+    protected double y;
 
     public Agent(String name) {
         this.name = name;
@@ -94,11 +94,19 @@ public abstract class Agent implements Runnable {
         }
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
+    }
+
+    public Heading getHeading() {
+        return heading;
+    }
+
+    public void setHeading(Heading heading) {
+        this.heading = heading;
     }
 }

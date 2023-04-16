@@ -8,7 +8,7 @@ import java.util.Iterator;
 class Drunk extends Agent {
 
     public Drunk() {
-        super("agent");
+        super("Drunk");
         heading = Heading.random();
     }
 

@@ -46,4 +46,8 @@ public class Manager  extends Console {
         stdout.println("h to halt");
         stdout.println("d to display status");
     }
+
+    public List<Agent> getAgents() {
+        return agents;
+    }
 }

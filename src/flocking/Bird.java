@@ -5,15 +5,35 @@ import java.awt.*;
 import java.util.Iterator;
 class Bird extends Agent{
 
+    int speed;
     public Bird()
     {
-        super("agent");
+        super("Bird");
         heading = Heading.random();
+        speed = Utilities.rng.nextInt(4) + 1;
     }
 
     public void update()
     {
+     //   Bird neighbor = getNeighbor(this, 10);
+      //  if(neighbor != null)
+       // {
+        //    this.setHeading(neighbor.getHeading());
+         //   this.setSpeed(neighbor.getSpeed());
+        //}
+        //else {
+         //   heading = Heading.random();
+          //  int steps = this.speed * (Utilities.rng.nextInt(10) + 1);
+           // move(steps);
+       // }
+    }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }
 
