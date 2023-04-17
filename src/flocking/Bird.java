@@ -15,7 +15,7 @@ class Bird extends Agent{
 
     public void update()
     {
-        Bird neighbor = (Bird) world.getNeighbor(this, 50.0);
+        Bird neighbor = (Bird) world.getNeighbor(this, 25.0);
         if(neighbor != null)
         {
             this.setHeading(neighbor.getHeading());

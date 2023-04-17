@@ -80,18 +80,29 @@ public class Simulation extends Model {
         stopTimer();
     }
 
-    public Agent getNeighbor(Agent a, Double radius)
+    public synchronized Agent getNeighbor(Agent a, Double radius)
     {
-        for(Agent b: agents)
+        Agent neighbor = null;
+        int n = Utilities.rng.nextInt(agents.size());
+        int start = n;
+        while(neighbor == null)
         {
+            Agent b = agents.get(n);
             double distance = Math.sqrt(Math.pow(2, b.getX() - a.getX()) + Math.pow(2, b.getY() - a.getY()));
-            if(distance <= radius)
+            if(b != a && distance <= radius)
             {
-                return b;
+                neighbor = b;
+            }
+            else {
+                n = (n + 1) % agents.size();
+                if(start == n)
+                {
+                    break;
+                }
             }
         }
 
-        return null;
+        return neighbor;
     }
 
     public void populate()
@@ -102,8 +113,8 @@ public class Simulation extends Model {
     public String[] stats()
     {
         String[] s = new String[2];
-        s[0] = "agents: " + agents.size();
-        s[1] = "timer: " + this.getClock();
+        s[0] = "#Agents: " + agents.size();
+        s[1] = "Timer: " + this.getClock();
         return s;
     }
 
