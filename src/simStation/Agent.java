@@ -130,6 +130,66 @@ public abstract class Agent implements Runnable {
                 world.changed();
                 break;
             }
+            case NORTHWEST:
+            {
+                x-= Math.sqrt(Math.pow(2, steps)/2);
+                y -= Math.sqrt(Math.pow(2, steps)/2);
+                if(y < 0)
+                {
+                    y = Simulation.SIZE + y;
+                }
+                if(x < 0)
+                {
+                    x = Simulation.SIZE + x;
+                }
+                world.changed();
+                break;
+            }
+            case NORTHEAST:
+            {
+                x+= Math.sqrt(Math.pow(2, steps)/2);
+                y -= Math.sqrt(Math.pow(2, steps)/2);
+                if(y > Simulation.SIZE)
+                {
+                    y = Simulation.SIZE - y;
+                }
+                if(x > Simulation.SIZE)
+                {
+                    x = Simulation.SIZE - x;
+                }
+                world.changed();
+                break;
+            }
+            case SOUTHWEST:
+            {
+                x-= Math.sqrt(Math.pow(2, steps)/2);
+                y += Math.sqrt(Math.pow(2, steps)/2);
+                if(y < 0)
+                {
+                    y = Simulation.SIZE + y;
+                }
+                if(x < 0)
+                {
+                    x = Simulation.SIZE + x;
+                }
+                world.changed();
+                break;
+            }
+            case SOUTHEAST:
+            {
+                x += Math.sqrt(Math.pow(2, steps)/2);
+                y += Math.sqrt(Math.pow(2, steps)/2);
+                if(y < 0)
+                {
+                    y = Simulation.SIZE + y;
+                }
+                if(x > Simulation.SIZE)
+                {
+                    x = Simulation.SIZE - x;
+                }
+                world.changed();
+                break;
+            }
         }
     }
 

@@ -23,6 +23,23 @@ public enum Heading {
         {
             return Heading.WEST;
         }
+
+        else if(n == 4)
+        {
+            return Heading.NORTHWEST;
+        }
+        else if(n == 5)
+        {
+            return Heading.NORTHEAST;
+        }
+        else if(n == 6)
+        {
+            return Heading.SOUTHWEST;
+        }
+        else if(n == 7)
+        {
+            return Heading.SOUTHEAST;
+        }
         return null;
     }
 }
