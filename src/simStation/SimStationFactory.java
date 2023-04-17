@@ -11,6 +11,7 @@ public class SimStationFactory implements AppFactory {
 
     public View makeView(Model m)
     {
+
         return new SimulationView((Simulation)m);
     }
 
@@ -26,12 +27,14 @@ public class SimStationFactory implements AppFactory {
 
     public String about()
     {
-        return "SimStation simulation 1.0 for CS151 group 10";
+        return "SimStation simulation 1.0 for Lance Le";
     }
 
     public String[] getHelp()
     {
-        return new String[]{"blah blah blah"};
+        return new String[]{"Start: Begins the simulation", "Suspend: Temporarily stops the simulation",
+                "Resume: Begins the simulation from a suspended state", "Stop: Permanently stops the simulation",
+                "Stats: Shows the stats of the simulation"};
     }
 
     public Command makeEditCommand(Model model, String type, Object source){

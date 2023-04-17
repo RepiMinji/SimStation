@@ -7,12 +7,12 @@ import java.util.Iterator;
 
 class plague extends Agent {
 
-    boolean host;
+    private boolean infected;
 
     public plague(boolean v){
         super("Plague");
         heading = heading.random();
-        host = v;
+        infected = v;
 
 
     }
@@ -21,7 +21,7 @@ class plague extends Agent {
         plague neighbor = (plague) world.getNeighbor(this, 50.0);
         if(neighbor != null)
         {
-            if(neighbor.getInfectedStatus() == true){
+            if(neighbor.isInfected() == true && this.isInfected() == false){
                     this.setInfected();
                     //make red somehow idk
             }
@@ -33,12 +33,12 @@ class plague extends Agent {
     }
 
 
-    public boolean getInfectedStatus(){
-        return host;
+    public boolean isInfected(){
+        return infected;
     }
 
     public void setInfected(){
-        this.host = true;
+        this.infected = true;
     }
 
 }
@@ -47,6 +47,7 @@ class plagueFactory extends SimStationFactory{
 
     public Model makeModel() { return new plagueSimulation(); }
     public String getTitle() { return "PlagueSimulation";}
+    public View makeView(Model model){return new plagueView(model);}
 }
 
 class plagueSimulation extends Simulation{
@@ -76,9 +77,9 @@ class plagueSimulation extends Simulation{
         int infected = 0;
         while (count.hasNext()) {
             plague p = (plague) count.next();
-            if (p.getInfectedStatus() == true) { infected++;}
+            if (p.isInfected() == true) { infected++;}
         }
-        s[2]="# of infected: " + infected;
+        s[2]="% infected: " + 100*(infected/this.agents.size());
         return s;
     }
 
@@ -86,5 +87,32 @@ class plagueSimulation extends Simulation{
     {
         AppPanel panel = new SimulationPanel(new plagueFactory());
         panel.display();
+    }
+}
+
+class plagueView extends View{
+    public plagueView(Model m)
+    {
+        super(m);
+    }
+
+    public void paintComponent(Graphics gc)
+    {
+        Color oldColor = gc.getColor();
+        plagueSimulation sim = (plagueSimulation) model;
+        Iterator<Agent> it = sim.iterator();
+        while(it.hasNext())
+        {
+           plague h = (plague) it.next();
+           if(h.isInfected())
+           {
+               gc.setColor(Color.red);
+           }
+           else {
+               gc.setColor(Color.green);
+           }
+           gc.fillOval(h.getX(), h.getY(), 5, 5);
+        }
+        gc.setColor(oldColor);
     }
 }
