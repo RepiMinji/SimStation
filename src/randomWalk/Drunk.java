@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.Iterator;
 
 class Drunk extends Agent {
-
     public Drunk() {
         super("Drunk");
         heading = Heading.random();

@@ -27,5 +27,6 @@ public class SimulationView extends View {
             gc.fillOval(a.getX(), a.getY(), 5, 5);
         }
         gc.setColor(oldColor);
+        repaint();
     }
 }

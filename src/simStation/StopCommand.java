@@ -1,5 +1,6 @@
 package simStation;
 import mvc.*;
+
 public class StopCommand extends Command{
 
     public StopCommand(Model m)
