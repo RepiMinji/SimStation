@@ -75,7 +75,7 @@ public abstract class Agent implements Runnable {
         while (!isStopped()) {
             try {
                 update();
-                Thread.sleep(100);
+                Thread.sleep(20);
                 checkSuspended();
             } catch(InterruptedException e) {
                 manager.println(e.getMessage());
