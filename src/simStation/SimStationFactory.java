@@ -27,7 +27,7 @@ public class SimStationFactory implements AppFactory {
 
     public String about()
     {
-        return "SimStation simulation 1.0 for Lance Le";
+        return "SimStation simulation 1.0 for CS151 group 10";
     }
 
     public String[] getHelp()
