@@ -18,17 +18,13 @@ class plague extends Agent {
     }
 
     public void update(){
-        plague neighbor = (plague) world.getNeighbor(this, 50.0);
-        if(neighbor != null)
+        plague neighbor = (plague) world.getNeighbor(this, 200.0);
+        if(neighbor != null && neighbor.isInfected())
         {
-            if(neighbor.isInfected() == true && this.isInfected() == false){
-                    this.setInfected();
-                    //make red somehow idk
-            }
+            this.setInfected();
         }
-
         heading = Heading.random();
-        int steps = Utilities.rng.nextInt(10) + 1;
+        int steps = Utilities.rng.nextInt(5) + 1;
         move(steps);
     }
 
@@ -54,10 +50,10 @@ class plagueSimulation extends Simulation{
 
     public static int VIRULENCE = 50;
     public static int RESISTANCE = 2;
-    public static int initialInfected = 50;
+    public static int initialInfected = 5;
 
     public void populate() {
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 15; i++) {
             addAgent(new plague(false));
         }
 
@@ -74,12 +70,12 @@ class plagueSimulation extends Simulation{
 
         //count infected
         Iterator count = this.iterator();
-        int infected = 0;
+        Double inf = 0.0;
         while (count.hasNext()) {
             plague p = (plague) count.next();
-            if (p.isInfected() == true) { infected++;}
+            if (p.isInfected() == true) { inf++;}
         }
-        s[2]="% infected: " + 100*(infected/this.agents.size());
+        s[2]="% infected: " + 100*(inf/this.agents.size());
         return s;
     }
 
